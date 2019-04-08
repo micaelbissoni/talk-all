@@ -1,0 +1,71 @@
+<div class="container">
+    <div fxLayout="column" class="content">
+      <mat-drawer-container class="atendimento-container" autoSize>
+        <mat-drawer mode="side" opened>
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" vertical>
+            <mat-button-toggle value="Att: {{atendimento.id}}" *ngFor="let atendimento of atendimentos; let index = index">{{atendimento.name}}</mat-button-toggle>
+          </mat-button-toggle-group>
+        </mat-drawer>
+        <mat-drawer-content class="atendimento-sidenav-content">
+              <div>
+                <button mat-raised-button
+                    class="custom-buttom"
+                    (click)="addAtendimento()">
+                  Novo Atendimento
+                </button>
+                <button mat-raised-button
+                    class="custom-buttom"
+                    (click)="identifyAtendimento()">
+                    Identificar Atendimento
+                </button>
+                <button mat-raised-button
+                    class="custom-buttom"
+                    (click)="removeAtendimento(selected.value)">
+                    Fechar Aba
+                </button>
+              </div>
+              <mat-tab-group [selectedIndex]="selected.value"
+                  (selectedIndexChange)="selected.setValue($event)">
+                <mat-tab *ngFor="let atendimento of atendimentos; let index = index" label="Att: {{atendimento.id}}">
+                  <mat-card class="atendimento-form">
+                      {{ atendimento.name }}
+                      <form class="example-form">
+                          <mat-form-field>
+                            <mat-label>Tipo de Atendimento</mat-label>
+                            <mat-select>
+                              <mat-option *ngFor="let atendimentoTipo of atendimentoTipos" [value]="atendimentoTipo.value">
+                                {{atendimentoTipo.label}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Nome do Contato</mat-label>
+                            <mat-select>
+                              <mat-option *ngFor="let atendimento of atendimentos" [value]="atendimento.id">
+                                {{atendimento.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div>
+                            <mat-list>
+                              <mat-list-item *ngFor="let message of messages">
+                                <mat-icon mat-list-icon>message</mat-icon>
+                                <h4 mat-line>{{message.message}}</h4>
+                                <p mat-line> {{message.updated | date}} </p>
+                              </mat-list-item>
+                            </mat-list>                            
+                          </div>
+                          <div>
+                            <mat-form-field>
+                              <textarea matInput></textarea>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary">=></button>
+                          </div>
+                      </form>
+                  </mat-card>
+                </mat-tab>
+              </mat-tab-group>        
+        </mat-drawer-content>
+      </mat-drawer-container>
+  </div>
+</div>
