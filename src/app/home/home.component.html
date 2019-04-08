@@ -1,9 +1,12 @@
 <div class="container">
-    <div fxLayout="column" class="content">
+    <div class="content">
       <mat-drawer-container class="atendimento-container" autoSize>
         <mat-drawer mode="side" opened>
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style" vertical>
-            <mat-button-toggle value="Att: {{atendimento.id}}" *ngFor="let atendimento of atendimentos; let index = index">{{atendimento.name}}</mat-button-toggle>
+            <mat-button-toggle value="Att: {{atendimento.id}}" *ngFor="let atendimento of atendimentos; let index = index">
+              <mat-icon>icount_box</mat-icon>
+              {{atendimento.name}}
+            </mat-button-toggle>
           </mat-button-toggle-group>
         </mat-drawer>
         <mat-drawer-content class="atendimento-sidenav-content">
