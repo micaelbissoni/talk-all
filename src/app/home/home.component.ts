@@ -2,11 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import FakeApi from '../../assets/fakeapi.json';
 
-export interface Section {
-  message: string;
-  updated: Date;
-}
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,21 +9,9 @@ export interface Section {
 })
 export class HomeComponent implements OnInit {
   atendimentos = [];
-  messages: Section[] = [
-    {
-      message: 'Bom dia gostaria de falar sobre um problema de faturamento',
-      updated: new Date('1/1/2019'),
-    },
-    {
-      message: 'Bom dia o senhor já abriu um novo atendimento pelo central de assinante?',
-      updated: new Date('1/17/2019'),
-    },
-    {
-      message: 'Sim ontem o número do protocolo é 123456',
-      updated: new Date('1/28/2019'),
-    }
-  ];
-  
+  messages = [];
+  public now: number = 0;
+
   atendimentoTipos = [
     {
       value: 0,
@@ -58,11 +41,18 @@ export class HomeComponent implements OnInit {
     this.selected.setValue(this.atendimentos.length - 1);
   }
 
-  identifyAtendimento() {
+  identifyAtendimento(index) {
+    this.selected.setValue(index);
   }
 
   removeAtendimento(index: number) {
     this.atendimentos.splice(index, 1);
   }
 
+  sendMessage(message) {
+    this.messages.push({
+      message: message,
+      updated: Date.now(),
+    });
+  }
 }
